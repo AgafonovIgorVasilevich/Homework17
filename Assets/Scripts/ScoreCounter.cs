@@ -3,13 +3,15 @@ using System;
 
 public class ScoreCounter : MonoBehaviour
 {
+    [SerializeField] private EnemyPool _enemyPool;
+
     private int _score;
 
     public Action<int> ScoreChanged;
 
-    private void OnEnable() => Enemy.s_EnemyDied += AddScore;
+    private void OnEnable() => _enemyPool.InstancePuted += AddScore;
 
-    private void OnDisable() => Enemy.s_EnemyDied -= AddScore;
+    private void OnDisable() => _enemyPool.InstancePuted -= AddScore;
 
     public void AddScore()
     {

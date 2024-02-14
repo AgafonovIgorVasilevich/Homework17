@@ -1,26 +1,19 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BulletPool))]
-
 public abstract class Cannon : MonoBehaviour
 {
-    [SerializeField] private PersonCollisionHandler _owner;
+    [SerializeField] private Person _owner;
 
-    private Collider2D _ignoredCollider;
-    private BulletPool _pool;
+    [SerializeField] private BulletPool _pool;
 
-    private void Awake()
-    {
-        _ignoredCollider = _owner.GetComponent<Collider2D>();
-        _pool = GetComponent<BulletPool>();
-    }
+    public void SetPool(BulletPool pool) => _pool = pool;
 
     protected void Shoot()
     {
         Vector2 direction = transform.right;
-        Bullet bullet = _pool.GetBullet();
+        Bullet bullet = _pool.Get();
 
-        bullet.Initialize(direction, transform.position, _ignoredCollider, _pool);
-        _owner.AddException(bullet.GetComponent<Collider2D>());
+        bullet.transform.position = transform.position;
+        bullet.Launch(direction, _owner.Type);
     }
 } 

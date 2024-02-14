@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 324670342441175159}
-  - component: {fileID: 4557764648077118446}
-  - component: {fileID: 3109073343754588176}
+  - component: {fileID: 2976982803489058992}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -33,7 +32,7 @@ Transform:
   m_Father: {fileID: 7729490994890711443}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
---- !u!114 &4557764648077118446
+--- !u!114 &2976982803489058992
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,21 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee84e2329406574fa5cee6cbd7b3c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _owner: {fileID: 5897255066966710119}
-  _delayTime: 1
---- !u!114 &3109073343754588176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172376387577857339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b280e34e0eaa0ad4483abdca81e30f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _template: {fileID: 2022271589434106777, guid: 31b3a6f13e8559747a6d89a1decdb14b, type: 3}
+  _owner: {fileID: 3524735246093998382}
+  _pool: {fileID: 0}
+  _delayTime: 0.5
 --- !u!1 &7950767282699476997
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09fbf82d7ea8b1418251656e9061758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _owner: {fileID: 3524735246093998382}
 --- !u!114 &3922070466537365485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da2dfb16d6ee61c4fa248b35d006f65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cannon: {fileID: 2976982803489058992}
 --- !u!70 &8433693245685694949
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

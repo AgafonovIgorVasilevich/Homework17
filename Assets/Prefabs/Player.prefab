@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5319221199428672503}
   - component: {fileID: 5931091991356456368}
-  - component: {fileID: 4591044547625572313}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -45,20 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e931a1ee8dc5024fbaaf995388a200b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collisionHandler: {fileID: 2365347519900997627}
---- !u!114 &4591044547625572313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6666651364732286384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aaefd1868140c34a8c02dccc0f5791e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _template: {fileID: 2022271589434106777, guid: 31b3a6f13e8559747a6d89a1decdb14b, type: 3}
+  _owner: {fileID: 5395667423944744924}
+  _pool: {fileID: 0}
 --- !u!1 &9081241159496414377
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +83,7 @@ Transform:
   m_Children:
   - {fileID: 5319221199428672503}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8005836701207426637
 SpriteRenderer:
@@ -264,3 +251,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09fbf82d7ea8b1418251656e9061758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _owner: {fileID: 0}

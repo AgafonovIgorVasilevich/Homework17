@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -6,31 +5,27 @@ using System;
 
 public class PersonCollisionHandler : MonoBehaviour
 {
-    private List<Collider2D> _exceptions = new List<Collider2D>();
+    [SerializeField] private Person _owner;
 
-    public Action<IInteractable> CollisionDetected;
+    public event Action<Obstacle> ObstacleHit;
+    public event Action BulletHit;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (IsException(collision))
-            return;
-
-        if(collision.TryGetComponent(out IInteractable hit))
-            CollisionDetected?.Invoke(hit);
+        if (collision.TryGetComponent(out IInteractable hit))
+            TakeCollision(hit);
     }
 
-    public void AddException(Collider2D collider)
+    private void TakeCollision(IInteractable interactable)
     {
-        if(IsException(collider) == false)
-            _exceptions.Add(collider);
-    }
-
-    private bool IsException(Collider2D collision)
-    {
-        foreach (Collider2D exception in _exceptions)
-            if (exception == collision)
-                return true;
-
-        return false;
+        if (interactable is Bullet bullet && bullet.OwnerType != _owner.Type)
+        {
+            bullet.BackToPool();
+            BulletHit?.Invoke();
+        }
+        else if (interactable is Obstacle obstacle)
+        {
+            ObstacleHit?.Invoke(obstacle);
+        }
     }
 }

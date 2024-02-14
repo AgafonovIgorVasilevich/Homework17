@@ -1,53 +1,30 @@
 using UnityEngine;
-using System;
 
-[RequireComponent(typeof(PersonCollisionHandler))]
 [RequireComponent(typeof(EnemyMovement))]
 
-public class Enemy : MonoBehaviour
+public class Enemy : Person
 {
-    private PersonCollisionHandler _collisionHandler;
-    private EnemyMovement _movement;
-    private EnemyPool _pull;
+    [SerializeField] private Cannon _cannon;
 
-    public static Action s_EnemyDied;
+    public override PersonType Type => PersonType.Enemy;
 
-    private void Awake()
+    public void Initialize(BulletPool pool) => _cannon.SetPool(pool);
+
+    protected override void TakeBulletHit()
     {
-        _collisionHandler = GetComponent<PersonCollisionHandler>();
-        _movement = GetComponent<EnemyMovement>();
+        Die();
     }
 
-    private void OnEnable()
+    protected override void TakeCollision(Obstacle danger)
     {
-        _collisionHandler.CollisionDetected += TakeCollision;
-        Player.s_GameOver += Die;
-    }
-
-    private void OnDisable()
-    {
-        _collisionHandler.CollisionDetected -= TakeCollision;
-        Player.s_GameOver -= Die;
-    }
-
-    public void Inintialize(Vector2 position, EnemyPool pull)
-    {
-        transform.position = position;
-        gameObject.SetActive(true);
-        _pull = pull;
-        StartCoroutine(_movement.Move());
-    }
-
-    private void TakeCollision(IInteractable collision)
-    {
-        if (collision is Bullet)
-            Die();
+        
     }
 
     private void Die()
     {
-        gameObject.SetActive(false);
-        _pull.PutEnemy(this);
-        s_EnemyDied?.Invoke();
+        if (transform.parent.TryGetComponent(out EnemyPool pool))
+            pool.Put(this);
+        else
+            Destroy(gameObject);
     }
 }

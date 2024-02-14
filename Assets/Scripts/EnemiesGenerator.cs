@@ -3,28 +3,31 @@ using UnityEngine;
 
 public class EnemiesGenerator : MonoBehaviour
 {
-    [SerializeField] private float _timeDelay = 3;
+    [SerializeField] private float _delayTime = 3;
     [SerializeField] private int _maxCount = 2;
-    [SerializeField] private EnemyPool _pool;
+
+    [SerializeField] private BulletPool _bulletPool;
+    [SerializeField] private EnemyPool _enemyPool;
 
     private int _currentCount = 0;
 
-    private void OnEnable() => Enemy.s_EnemyDied += CreateFreePlace;
+    private void OnEnable() => _enemyPool.InstancePuted += CreateFreePlace;
 
-    private void OnDisable() => Enemy.s_EnemyDied -= CreateFreePlace;
+    private void OnDisable() => _enemyPool.InstancePuted -= CreateFreePlace;
 
     private void Start() => StartCoroutine(GenerateEnemies());
 
     private void Spawn()
     {
-        Enemy enemy = _pool.GetEnemy();
-        enemy.Inintialize(transform.position, _pool);
+        Enemy enemy = _enemyPool.Get();
+        enemy.transform.position = transform.position;
+        enemy.Initialize(_bulletPool);
         _currentCount++;
     }
 
     private IEnumerator GenerateEnemies()
     {
-        WaitForSeconds delay = new WaitForSeconds(_timeDelay);
+        WaitForSeconds delay = new WaitForSeconds(_delayTime);
 
         while (enabled)
         {

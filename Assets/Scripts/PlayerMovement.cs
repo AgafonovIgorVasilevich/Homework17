@@ -12,14 +12,12 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion _maxRotation;
     private Quaternion _minRotation;
     private Rigidbody2D _rigidbody;
-    private Vector2 _startPosition;
 
     private void Awake()
     {
         _maxRotation = Quaternion.Euler(-0, 0, _maxAngle);
         _minRotation = Quaternion.Euler(0, 0, _minAngle);
         _rigidbody = GetComponent<Rigidbody2D>();
-        _startPosition = transform.position;
     }
 
     private void Update()
@@ -35,12 +33,5 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody.velocity = Vector2.up * _jumpForce;
         transform.rotation = _maxRotation;
-    }
-
-    public void Reset()
-    {
-        transform.rotation = Quaternion.identity;
-        transform.position = _startPosition;
-        _rigidbody.velocity = Vector2.zero;
     }
 }

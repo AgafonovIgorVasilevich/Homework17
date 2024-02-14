@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
     private float _minYPosition = -3;
     private float _maxYPosition = 3f;
 
-    private void Start() => StartCoroutine(Move());
+    private void OnEnable() => StartCoroutine(Move());
 
     public IEnumerator Move()
     {
@@ -19,8 +19,8 @@ public class EnemyMovement : MonoBehaviour
 
         while(enabled)
         {
-            angle += Time.deltaTime;
-            yPosition = startPosition.y + Mathf.Sin(angle * _speed) * _amplitude;
+            angle += Time.deltaTime * _speed;
+            yPosition = startPosition.y + Mathf.Sin(angle) * _amplitude;
             transform.position = new Vector2(startPosition.x, yPosition);
             yield return null;
         }
